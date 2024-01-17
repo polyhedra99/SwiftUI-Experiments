@@ -12,9 +12,9 @@ class HistoryEntry: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var query: String
     @Persisted var timestamp: Date
     
-    convenience init(query: String) {
+    convenience init(query: String, timestamp: Date) {
         self.init()
         self.query = query
-        self.timestamp = Date()
+        self.timestamp = timestamp
     }
 }

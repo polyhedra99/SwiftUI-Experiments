@@ -9,9 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct RepoDetailView: View {
-    private var id: ObjectId
+    private var id: Int
     
-    init(id: ObjectId) {
+    init(id: Int) {
         self.id = id
     }
     
@@ -53,6 +53,7 @@ struct RepoDetailView: View {
         .background(.foreground.opacity(0.15))
         // I find this method of rounding corners very weird, but not sure of an alternative
         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 16.0, height: 1.0)))
+        .padding()
         
         Spacer()
     }

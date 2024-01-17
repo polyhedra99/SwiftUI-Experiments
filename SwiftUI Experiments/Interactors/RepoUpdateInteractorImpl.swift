@@ -12,16 +12,29 @@ class RepoUpdateInteractorImpl: RepoUpdateInteractor {
         self.repository = repository
     }
     
-    func process(query: String) async -> ReposSideEffect? {
+    // In a bigger project would chain interactors instead
+    func process(query: String, perPage: Int, stalePreserved: Int) async -> ReposSideEffect? {
         if (query.isEmpty) {
             return nil
-        // Pseudo-validation for demonstrational purposes
+            // Pseudo-validation for demonstrational purposes
         } else if (query.contains("~")) {
             return ReposSideEffect.validationFailure(reason: Strings.REPOS_CONTAINS_TILDA)
         } else {
-            return await repository.updateRepos(query: query.lowercased()).map { error in
+            await repository.saveQueryToHistory(query: query)
+            
+            let fetchResult = await repository.fetchRepos(query: query.lowercased(), perPage: perPage)
+            if let repos = fetchResult.0 {
+                await repository.saveRepos(repos: repos, forQuery: query)
+            } else {
+                Logger.error(caller: self, msg: "Fetched repos are null.")
+            }
+            
+            await repository.cleanStaleReposData(stalePreserved: stalePreserved)
+            
+            let optionalError = fetchResult.1.map { error in
                 ReposSideEffect.networkError(reason: error.localizedDescription)
             }
+            return optionalError
         }
     }
 }

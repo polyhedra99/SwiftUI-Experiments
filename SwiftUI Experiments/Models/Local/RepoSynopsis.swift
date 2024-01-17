@@ -9,6 +9,7 @@ import RealmSwift
 
 class RepoSynopsis: Projection<RepoDetails>, ObjectKeyIdentifiable {
     @Projected(\RepoDetails.id) var id
+    @Projected(\RepoDetails.query) var query
     @Projected(\RepoDetails.name) var name
     @Projected(\RepoDetails.repoDescription) var repoDescription
     @Projected(\RepoDetails.watchersCount) var watchersCount

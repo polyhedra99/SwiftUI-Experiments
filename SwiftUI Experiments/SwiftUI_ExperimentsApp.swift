@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct SwiftUI_ExperimentsApp: App {
+    @AppStorage(Strings.APP_STORAGE_THEME) var theme = ThemeSelection.defaultTheme
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().desideOnColorScheme(themeSelection: theme)
         }
     }
 }

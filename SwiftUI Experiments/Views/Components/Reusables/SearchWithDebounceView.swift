@@ -11,7 +11,7 @@ import Combine
 struct SearchWithDebounceView: View {
     @StateObject private var textObserver = TextFieldObserver()
     @State var showClearButton = false
-    var placeholder = "Search"
+    var placeholder = Strings.SEARCH_PLACEHOLDER
     var onDebouncedChange: (String) -> ()
     
     var body: some View {
@@ -36,10 +36,8 @@ struct SearchWithDebounceView: View {
         )
         .padding(.horizontal)
         .padding(.vertical, 10)
-        // TODO: Make same background style for other views
         .background(Color(.secondarySystemBackground))
-        // I find this method of rounding corners very weird, but not sure of an alternative
-        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 16.0, height: 1.0)))
+        .clipShape(Capsule())
     }
 }
 

@@ -5,4 +5,7 @@
 //  Created by Mykhailo on 1/15/24.
 //
 
-import Foundation
+struct UniversalConstants {
+    static let DEFAULT_PER_PAGE = 15
+    static let DEFAULT_CACHED = 6
+}

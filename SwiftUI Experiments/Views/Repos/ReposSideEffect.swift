@@ -5,4 +5,7 @@
 //  Created by Mykhailo on 1/10/24.
 //
 
-import Foundation
+enum ReposSideEffect {
+    case validationFailure(reason: String)
+    case networkError(reason: String)
+}

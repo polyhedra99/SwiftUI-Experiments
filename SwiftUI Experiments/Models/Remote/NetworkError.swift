@@ -17,11 +17,11 @@ extension NetworkError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .decodingError:
-            return "Failed to decode the object from the service."
+            return Strings.DECODING_ERROR
         case .errorCode(let code):
-            return "\(code) - error code."
+            return Strings.CODE_ERROR(code)
         case .unknown:
-            return "Unknown error."
+            return Strings.UNKNOWN_ERROR
         }
     }
 }

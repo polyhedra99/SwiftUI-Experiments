@@ -6,5 +6,6 @@
 //
 
 protocol RepoUpdateInteractor {
-    func process(query: String) async -> ReposSideEffect?
+    // One more and parameters get abstracted to a model
+    func process(query: String, perPage: Int, stalePreserved: Int) async -> ReposSideEffect?
 }
